@@ -87,6 +87,7 @@
     "plugins": [
     ],
     "topicSeparator": " ",
+    "helpClass": "./lib/help",
     "topics": {
       "config:context": {},
       "config": {}
