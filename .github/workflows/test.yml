@@ -1,0 +1,17 @@
+name: test
+on:
+  workflow_dispatch:
+
+jobs:
+  check_prepack:
+    runs-on: ubuntu-latest
+    setps:
+      - name: Checkout Repository 
+        uses: actions/checkout@v2
+      - name: Setup Nodejs 
+        uses: actions/setup-node@v1
+        with:
+          node-version: 14
+      - name: run npm prepack
+        run: npm run prepack
+
