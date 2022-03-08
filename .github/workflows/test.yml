@@ -5,7 +5,7 @@ on:
 jobs:
   check_prepack:
     runs-on: ubuntu-latest
-    setps:
+    steps:
       - name: Checkout Repository 
         uses: actions/checkout@v2
       - name: Setup Nodejs 
