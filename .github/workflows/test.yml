@@ -5,6 +5,7 @@ on:
 
 jobs:
   check_prepack:
+    name: check prepack
     runs-on: ubuntu-latest
     steps:
       - name: Checkout Repository 
