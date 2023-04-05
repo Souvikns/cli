@@ -16,7 +16,13 @@ describe('new', () => {
 
   describe('create new file', () => {
     afterEach(() => {
+      try {
       testHelper.newCommandHelper().deleteSpecFile();
+      } catch (e) {
+        if (e.code !== 'ENOENT') {
+          throw e;
+        }
+      }
     });
     
     test
@@ -52,7 +58,13 @@ describe('new', () => {
     });
 
     afterEach(() => {
-      testHelper.newCommandHelper().deleteSpecFile();
+      try {
+      testHelper.deleteSpecFileAtWorkingDir();
+      } catch (e) {
+        if (e.code !== 'ENOENT') {
+          throw e;
+        }
+      }
     });
 
     test
