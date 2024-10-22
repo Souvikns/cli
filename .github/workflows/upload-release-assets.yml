@@ -62,7 +62,7 @@ jobs:
         #fix for windows build issue #1433
         name: Install p7zip-full nsis
         run: sudo apt-get install -y p7zip-full nsis
-      - if: matrix.os == 'windows-latest'
+      - if: matrix.npm_script == 'pack:windows'
         #npm cli 10 is buggy because of some cache issue
         name: Install npm cli 10
         shell: bash
@@ -75,18 +75,4 @@ jobs:
       - name: Assets generation
         shell: bash
         run: npm run ${{ matrix.npm_script }}
-      - name: Update release
-        uses: softprops/action-gh-release@v1
-        with:
-          files: dist/${{ matrix.dist_folder }}/asyncapi.${{ matrix.extension }}
-          tag_name: v${{ steps.extractver.outputs.version }}
-          token: ${{ secrets.GH_TOKEN }}
-      - if: failure() # Only, on failure, send a message on the 94_bot-failing-ci slack channel
-        name: Report workflow run status to Slack
-        uses: 8398a7/action-slack@fbd6aa58ba854a740e11a35d0df80cb5d12101d8 #using https://github.com/8398a7/action-slack/releases/tag/v3.15.1
-        with:
-          status: ${{ job.status }}
-          fields: repo,action,workflow
-          text: 'AsyncAPI CLI release build artifacts failed'
-        env:
-          SLACK_WEBHOOK_URL: ${{ secrets.SLACK_CI_FAIL_NOTIFY }}
+
